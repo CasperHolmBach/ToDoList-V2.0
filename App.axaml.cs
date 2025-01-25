@@ -26,7 +26,8 @@ public partial class App : Application
         // Creates a ServiceProvider containing services from the provided IServiceCollection
         var services = collection.BuildServiceProvider();
 
-        var vm = services.GetRequiredService<Frontend>();
+        var vm = services.GetRequiredService<IFrontendLayer>();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
@@ -50,7 +51,7 @@ public static class ServiceCollectionExtensions
     public static void AddCommonServices(this IServiceCollection collection)
     {
         collection.AddSingleton<IDataLayer, Data>();
-        collection.AddSingleton<Logic>();
-        collection.AddSingleton<Frontend>();
+        collection.AddSingleton<ILogicLayer, Logic>();
+        collection.AddSingleton<IFrontendLayer, Frontend>();
     }
 }

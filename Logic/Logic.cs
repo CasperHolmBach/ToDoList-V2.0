@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 public class Logic : ILogicLayer
 {   
-    private readonly IFrontendLayer frontendLayer;
     private readonly IDataLayer dataLayer;
     private List<Job> jobList = new List<Job>();
 
-    public Logic(IFrontendLayer frontendLayer, IDataLayer dataLayer)
+    public Logic(IDataLayer dataLayer)
     {
-        this.frontendLayer = frontendLayer;
         this.dataLayer = dataLayer;
     }
 
