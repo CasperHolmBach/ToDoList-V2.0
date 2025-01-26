@@ -5,5 +5,20 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="ToDoListV2.MainWindow"
         Title="ToDoListV2">
-    Welcome to Avalonia!
+
+    <!-- Main Window content goes inside stackpanel -->
+    <StackPanel Margin="20">
+        <TextBlock>Welcome to TaskBuddy!</TextBlock>
+
+        <!-- Text inputs -->
+        <TextBlock Margin="0 5" >Task name:</TextBlock>
+        <TextBox x:Name="taskNameInput"/>
+        <TextBlock Margin="0 15 0 5">Task description</TextBlock>
+        <TextBox x:Name="taskDescriptionInput" Height="100" AcceptsReturn="True" TextWrapping="Wrap"/>
+
+        <!-- Create task button-->
+        <Button Click="ClickHandler">Create task</Button>
+        <TextBlock Margin="0 10" x:Name="message"></TextBlock>
+    </StackPanel>
+
 </Window>

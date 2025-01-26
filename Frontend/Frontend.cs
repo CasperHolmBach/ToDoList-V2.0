@@ -11,8 +11,18 @@ public class Frontend : IFrontendLayer
         this.logicLayer = logicLayer;
     }
 
-    public void ShowTasks()
+    public void ReceiveTaskProperties(string taskName, string taskDescription)
     {
-        throw new NotImplementedException();
+        //Check for null or empty before having logiclayer create job
+        if(string.IsNullOrEmpty(taskName))
+            throw new ArgumentException("Task name cannot be empty");
+
+        logicLayer.CreateJob(taskName, taskDescription);
+    }
+
+    public List<Job> ShowTasks()
+    {
+        List<Job> currentJobs = logicLayer.GetJobs();
+        return currentJobs;
     }
 }

@@ -26,21 +26,18 @@ public partial class App : Application
         // Creates a ServiceProvider containing services from the provided IServiceCollection
         var services = collection.BuildServiceProvider();
 
-        var vm = services.GetRequiredService<IFrontendLayer>();
+        var frontendLayer = services.GetRequiredService<IFrontendLayer>();
         
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = vm
-            };
+            var mainWindow = services.GetRequiredService<MainWindow>();
+            desktop.MainWindow = mainWindow;
+            desktop.MainWindow.DataContext = frontendLayer;
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainWindow
-            {
-                DataContext = vm
-            };
+            var mainWindow = services.GetRequiredService<MainWindow>();
+            singleViewPlatform.MainView = mainWindow;
         }
     }
 }
@@ -53,5 +50,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IDataLayer, Data>();
         collection.AddSingleton<ILogicLayer, Logic>();
         collection.AddSingleton<IFrontendLayer, Frontend>();
+
+        collection.AddTransient<MainWindow>();
     }
 }
